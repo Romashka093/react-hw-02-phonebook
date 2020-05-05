@@ -7,8 +7,9 @@ export function Filter({ value, onChangeFilter }) {
       <Input
         value={value}
         type="text"
-        placeholder="find contact by name"
+        placeholder="enter contact name"
         onChange={onChangeFilter}
+        titleNameInput="Find contact by name:"
       />
     </Fragment>
   );

@@ -4,18 +4,14 @@ import { ContactForm } from './contactForm/ContactForm';
 import { ContactList } from './contactList/ContactList';
 
 const contactId = shortid.generate();
-// const filterForContacts = (contacts, filter) => {
-// 	return contacts.filter((contact) => console.log(contact.name.toLowerCase().includes(filter.toLowerCase())));
-// };
 
 export class Phonebook extends Component {
   state = {
     contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      { id: 'id-5', name: 'Annie Copeland', number: '227-91-26' },
+      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' }
+      // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
     ],
     filter: '',
   };
@@ -25,12 +21,24 @@ export class Phonebook extends Component {
       ...contact,
       id: shortid.generate(),
     };
-
-    this.setState(prevState => {
-      return {
-        contacts: [...prevState.contacts, contactToAdd],
-      };
+    console.log('contactToAdd.name', contactToAdd.name);
+    let isUniqueName = false;
+    this.state.contacts.forEach(contact => {
+      if (contact.name.includes(contactToAdd.name)) {
+        isUniqueName = false;
+        // return alert(`${contactToAdd.name} is already in contacts.`);
+      } else {
+        isUniqueName = true;
+      }
     });
+    isUniqueName && alert(`${contactToAdd.name} is already in contacts.`);
+    // !isUniqueName &&
+    !isUniqueName &&
+      this.setState(prevState => {
+        return {
+          contacts: [...prevState.contacts, contactToAdd],
+        };
+      });
   };
 
   deleteContact = id => {
@@ -43,9 +51,11 @@ export class Phonebook extends Component {
 
   changeFilter = evt => {
     this.setState({ filter: evt.target.value });
+    // проверку на не существующее имя, да бы не пропадал блок с ContactList
   };
 
-  filterForContacts = (contacts, filter) => {
+  filterForContacts = () => {
+    const { contacts, filter } = this.state;
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase()),
     );
@@ -55,16 +65,15 @@ export class Phonebook extends Component {
     const { contacts, filter } = this.state;
     console.log(this.state);
 
-    // console.log(filterForContacts(contacts, filter));
-
-    const filteredContacts = this.filterForContacts(contacts, filter);
-    console.log(filteredContacts);
+    // const filteredContacts = this.filterForContacts(contacts, filter);
+    // console.log(filteredContacts);
 
     return (
       <Fragment>
         <ContactForm id={contactId} onAddContact={this.addContact} />
         <ContactList
-          contacts={filteredContacts}
+          length={contacts.length}
+          contacts={this.filterForContacts()}
           value={filter}
           onDeleteContact={this.deleteContact}
           onChangeFilter={this.changeFilter}

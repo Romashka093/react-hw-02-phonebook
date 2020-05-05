@@ -2,17 +2,20 @@ import React, { Fragment, Component } from 'react';
 import { Button } from '../../../ui/button/Button';
 import { Input } from '../../../ui/input/Input';
 
+const initialState = {
+  name: '',
+  number: '',
+};
+
 export class ContactForm extends Component {
   state = {
-    name: '',
-    number: '',
+    ...initialState,
   };
   handleChange = ({ target: { name, value } }) => {
     if (name === value) {
       return alert('NOT1');
     }
     this.setState({
-      // id: this.props.id,
       [name]: value,
     });
   };
@@ -25,8 +28,7 @@ export class ContactForm extends Component {
 
   reset = () => {
     this.setState({
-      name: '',
-      number: '',
+      ...initialState,
     });
   };
 
@@ -45,6 +47,7 @@ export class ContactForm extends Component {
             placeholder="enter name"
             value={name}
             id={id}
+            required
           />
           <Input
             name="number"
@@ -54,6 +57,7 @@ export class ContactForm extends Component {
             placeholder="enter number"
             value={number}
             id={id}
+            required
           />
           <br />
           <Button name="Add contact" type="submit" />
@@ -62,33 +66,3 @@ export class ContactForm extends Component {
     );
   }
 }
-// onHandleChange, id, onHandleSubmit, onAddContact
-// export function ContactForm({ name, number, onHandleChange, id, onHandleSubmit, onAddContact }) {
-// 	return (
-// <Fragment>
-// 	<h2>Phonebook</h2>
-// 	<form onSubmit={onHandleSubmit}>
-// 		<Input
-// 			name="name"
-// 			onChange={onHandleChange}
-// 			titleNameInput="Name"
-// 			type="text"
-// 			placeholder="enter name"
-// 			value={name}
-// 			id={id}
-// 		/>
-// 		<Input
-// 			name="number"
-// 			onChange={onHandleChange}
-// 			titleNameInput="Number"
-// 			type="tel"
-// 			placeholder="enter number"
-// 			value={number}
-// 			id={id}
-// 		/>
-// 		<br />
-// 		<Button name="Add contact" />
-// 	</form>
-// </Fragment>
-// 	);
-// }

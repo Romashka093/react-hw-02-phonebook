@@ -8,6 +8,7 @@ export function Input({
   onChange,
   name,
   id,
+  required,
 }) {
   return (
     <Fragment>
@@ -19,6 +20,7 @@ export function Input({
           value={value}
           onChange={onChange}
           name={name}
+          required={required}
         />
       </label>
     </Fragment>
