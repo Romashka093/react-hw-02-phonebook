@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 export function Input({
   titleNameInput,
@@ -11,7 +11,7 @@ export function Input({
   required,
 }) {
   return (
-    <Fragment>
+    <>
       <label htmlFor={id}>
         {titleNameInput}
         <input
@@ -23,6 +23,6 @@ export function Input({
           required={required}
         />
       </label>
-    </Fragment>
+    </>
   );
 }

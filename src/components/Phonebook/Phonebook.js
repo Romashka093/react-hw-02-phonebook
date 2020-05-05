@@ -8,7 +8,7 @@ const contactId = shortid.generate();
 export class Phonebook extends Component {
   state = {
     contacts: [
-      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' }
+      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
       // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
@@ -21,19 +21,18 @@ export class Phonebook extends Component {
       ...contact,
       id: shortid.generate(),
     };
-    console.log('contactToAdd.name', contactToAdd.name);
-    let isUniqueName = false;
+
+    let isUniqueName = true;
     this.state.contacts.forEach(contact => {
       if (contact.name.includes(contactToAdd.name)) {
         isUniqueName = false;
-        // return alert(`${contactToAdd.name} is already in contacts.`);
+        return alert(`${contactToAdd.name} is already in contacts.`);
       } else {
         isUniqueName = true;
       }
     });
-    isUniqueName && alert(`${contactToAdd.name} is already in contacts.`);
-    // !isUniqueName &&
-    !isUniqueName &&
+
+    isUniqueName &&
       this.setState(prevState => {
         return {
           contacts: [...prevState.contacts, contactToAdd],
@@ -51,7 +50,6 @@ export class Phonebook extends Component {
 
   changeFilter = evt => {
     this.setState({ filter: evt.target.value });
-    // проверку на не существующее имя, да бы не пропадал блок с ContactList
   };
 
   filterForContacts = () => {
@@ -64,9 +62,6 @@ export class Phonebook extends Component {
   render() {
     const { contacts, filter } = this.state;
     console.log(this.state);
-
-    // const filteredContacts = this.filterForContacts(contacts, filter);
-    // console.log(filteredContacts);
 
     return (
       <Fragment>

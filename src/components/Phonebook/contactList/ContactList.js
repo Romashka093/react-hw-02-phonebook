@@ -9,16 +9,18 @@ export const ContactList = ({
   onChangeFilter,
   value,
 }) => (
-  <ul>
-    <h2>Contacts</h2>
+  <>
+    <h2>Contacts:</h2>
     {length > 0 && <Filter value={value} onChangeFilter={onChangeFilter} />}
-    {contacts.map(contact => (
-      <li key={contact.id}>
-        <ListItem
-          {...contact}
-          onDeleteContact={() => onDeleteContact(contact.id)}
-        />
-      </li>
-    ))}
-  </ul>
+    <ul>
+      {contacts.map(contact => (
+        <li key={contact.id}>
+          <ListItem
+            {...contact}
+            onDeleteContact={() => onDeleteContact(contact.id)}
+          />
+        </li>
+      ))}
+    </ul>
+  </>
 );

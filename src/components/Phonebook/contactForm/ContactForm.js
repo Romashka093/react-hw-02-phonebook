@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { Button } from '../../../ui/button/Button';
 import { Input } from '../../../ui/input/Input';
 
@@ -36,7 +36,7 @@ export class ContactForm extends Component {
     const { name, number } = this.state;
     const { id } = this.props;
     return (
-      <Fragment>
+      <>
         <h2>Phonebook</h2>
         <form onSubmit={this.handleSubmit}>
           <Input
@@ -62,7 +62,7 @@ export class ContactForm extends Component {
           <br />
           <Button name="Add contact" type="submit" />
         </form>
-      </Fragment>
+      </>
     );
   }
 }
